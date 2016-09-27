@@ -30,11 +30,6 @@ udp.on('ready', () => {
     });
 });
 
-let i = 0;
-udp.on('message', () => {
-    i++;
-    console.log(i);
-});
 udp.open();
 
 const wss = new WebSocket.Server({
