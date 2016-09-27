@@ -44,12 +44,14 @@ function updateVelocity(emitter, data) {
 }
 
 module.exports = (rootOSCServer) => {
-    AFRAME.registerComponent('on-load', {
+    AFRAME.registerComponent('lhc', {
         init() {
-            const lhc = document.querySelector('#lhc');
+            const lhc = this.el;
             const emitter = lhc.components['particle-system'].particleGroup.emitters[0];
+            emitter.disable();
 
             rootOSCServer.on('raw-data', (data) => {
+                emitter.enable();
                 updateVelocity(emitter, data);
                 updateColor(emitter, data);
             });

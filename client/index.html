@@ -12,17 +12,17 @@
 </head>
 
 <body>
-  <a-scene on-load inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+  <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
     <a-assets>
       <img id="sky" src="images/niHC9wI.jpg">
     </a-assets>
-    <a-entity id="lhc" position="0 2.25 -5" particle-system="
+    <a-entity position="0 2.25 -5" particle-system="
       preset: dust;
       particleCount: 8000;
       maxAge: 4;
       size: 2;
       texture: images/flare-2.png;
-      velocitySpread: 150 7.5 10"></a-entity>
+      velocitySpread: 150 7.5 10" lhc></a-entity>
 
     <!-- Textured plane parallel to ground. -->
     <a-plane id="scene" height="20" color="#3B3F47" width="20" rotation="-90 0 0"></a-plane>
