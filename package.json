@@ -10,13 +10,15 @@
     "test": "eslint client/src/** server/**",
     "client:clean": "del-cli client/build && mkdir client/build",
     "client:js": "watchify client/src/index.js -o 'exorcist client/build/index.js.map > client/build/index.js' -d -v",
-    "client:browser": "browser-sync start --reload-delay 1000 --server 'client' --files 'client/build/index.js'",
+    "client:browser": "browser-sync start --reload-delay 1000 --server 'client' --files 'client/build/index.js' --files 'client/index.html'",
     "client:build": "run-p client:js client:browser",
     "client:serve": "run-s client:clean client:build",
     "osc": "nodemon --watch server server/index.js",
     "start": "run-p osc client:serve"
   },
   "dependencies": {
+    "aframe": "^0.3.1",
+    "aframe-particle-system-component": "^1.0.1",
     "eventemitter2": "^2.1.3",
     "osc": "^2.1.0",
     "pify": "^2.3.0",
@@ -63,6 +65,11 @@
   },
   "eslintConfig": {
     "extends": "postcss",
+    "globals": {
+      "document": true,
+      "AFRAME": true,
+      "window": true
+    },
     "rules": {
       "max-len": 0,
       "no-shadow": 0

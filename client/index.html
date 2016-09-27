@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
-        <h1>testt</h1>
-        <script type="text/javascript" src="vendor/osc-browser.min.js"></script>
-        <script type="text/javascript" src="vendor/flocking-all.min.js"></script>
-        <script type="text/javascript" src="build/index.js"></script>
-    </body>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script type="text/javascript" src="vendor/aframe.min.js"></script>
+  <script type="text/javascript" src="vendor/aframe-particle-system-component.min.js"></script>
+  <script type="text/javascript" src="vendor/osc-browser.min.js"></script>
+  <script type="text/javascript" src="vendor/flocking-all.min.js"></script>
+  <script type="text/javascript" src="build/index.js"></script>
+</head>
+
+<body>
+  <a-scene on-load inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+    <a-assets>
+      <img id="sky" src="images/niHC9wI.jpg">
+    </a-assets>
+    <a-entity id="lhc" position="0 2.25 -5" particle-system="
+      preset: dust;
+      particleCount: 8000;
+      maxAge: 4;
+      size: 2;
+      texture: images/flare-2.png;
+      velocitySpread: 150 7.5 10"></a-entity>
+
+    <!-- Textured plane parallel to ground. -->
+    <a-plane id="scene" height="20" color="#3B3F47" width="20" rotation="-90 0 0"></a-plane>
+
+    <a-sky src="#sky"></a-sky>
+  </a-scene>
+  <!-- <script type="text/javascript" src="vendor/aframe-inspector.js"></script> -->
+</body>
+
 </html>
