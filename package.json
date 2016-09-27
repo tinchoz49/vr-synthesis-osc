@@ -1,0 +1,77 @@
+{
+  "name": "logo",
+  "version": "1.0.0",
+  "description": "Demo using VR and music synthesis above OSC messages.",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=6.x.x"
+  },
+  "scripts": {
+    "test": "eslint client/src/** server/**",
+    "client:clean": "del-cli client/build && mkdir client/build",
+    "client:js": "watchify client/src/index.js -o 'exorcist client/build/index.js.map > client/build/index.js' -d -v",
+    "client:browser": "browser-sync start --reload-delay 1000 --server 'client' --files 'client/build/index.js'",
+    "client:build": "run-p client:js client:browser",
+    "client:serve": "run-s client:clean client:build",
+    "osc": "nodemon --watch server server/index.js",
+    "start": "run-p osc client:serve"
+  },
+  "dependencies": {
+    "osc": "^2.1.0",
+    "pify": "^2.3.0",
+    "uws": "^0.9.0"
+  },
+  "browserify-shim": {
+    "flocking": "global:flock",
+    "osc": "global:osc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-object-assign",
+      "transform-object-rest-spread",
+      "add-module-exports"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "browserify-shim"
+    ]
+  },
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.16.0",
+    "browserify-shim": "^3.8.12",
+    "del-cli": "^0.2.0",
+    "eslint": "^3.6.0",
+    "eslint-config-postcss": "^2.0.2",
+    "exorcist": "^0.4.0",
+    "live-server": "^1.1.0",
+    "nodemon": "^1.10.2",
+    "watchify": "^3.7.0"
+  },
+  "eslintConfig": {
+    "extends": "postcss",
+    "rules": {
+      "max-len": 0,
+      "no-shadow": 0
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    }
+  }
+}
