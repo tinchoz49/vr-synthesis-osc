@@ -1,29 +1,19 @@
 const osc = require('osc');
+const EventEmitter2 = require('eventemitter2').EventEmitter2;
+const ee = new EventEmitter2();
 
 const port = new osc.WebSocketPort({
     url: 'ws://localhost:8081'
 });
 
-let _onMessage = () => {};
-let _onRawData = () => {};
-
 port.on('message', (oscMessage) => {
-    _onMessage(oscMessage);
-
+    ee.emit('message', oscMessage);
     if (oscMessage.address === '/raw_data') {
-        _onRawData(
-            JSON.parse(oscMessage.args[0].replace(/(\"lep_E\":[0-9\.\-]*)(,)/g, '$1'))
-        );
+        // hay que eliminar la expresion regular porque produce un delay enorme
+        ee.emit('raw-data', JSON.parse(oscMessage.args[0].replace(/(\"lep_E\":[0-9\.\-]*)(,)/g, '$1')));
     }
 });
 
 port.open();
 
-module.exports = {
-    onMessage(cb) {
-        _onMessage = cb;
-    },
-    onRawData(cb) {
-        _onRawData = cb;
-    }
-};
+module.exports = ee;

@@ -1,5 +1,5 @@
 const rootOSCServer = require('./lib/root-osc-server');
 
-rootOSCServer.onRawData(data => {
+rootOSCServer.on('raw-data', data => {
     console.log(data);
 });

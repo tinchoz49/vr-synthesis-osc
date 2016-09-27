@@ -19,14 +19,22 @@ udp.on('ready', () => {
     ipAddresses.forEach((address) => {
         console.log(' Host:', address + ', Port:', udp.options.localPort);
     });
-    console.log('Broadcasting OSC over UDP to', udp.options.remoteAddress + ', Port:', udp.options.remotePort);
 
+    udp.send({
+        address: '/unsubscribe',
+        args: []
+    });
     udp.send({
         address: '/subscribe',
         args: []
     });
 });
 
+let i = 0;
+udp.on('message', () => {
+    i++;
+    console.log(i);
+});
 udp.open();
 
 const wss = new WebSocket.Server({

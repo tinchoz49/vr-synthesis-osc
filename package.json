@@ -17,6 +17,7 @@
     "start": "run-p osc client:serve"
   },
   "dependencies": {
+    "eventemitter2": "^2.1.3",
     "osc": "^2.1.0",
     "pify": "^2.3.0",
     "uws": "^0.9.0"
