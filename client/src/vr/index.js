@@ -41,23 +41,24 @@ function updatePosition(emitter, matrixWorld) {
 const pos = new THREE.Vector3();
 
 module.exports = (rootOSCServer) => {
+
     AFRAME.registerComponent('lhc', {
         init() {
             const lhc = this.el;
             const particleGroup = lhc.components['particle-system'].particleGroup;
             particleGroup.removeEmitter(lhc.components['particle-system'].particleGroup.emitters[0]);
 
-            particleGroup.addPool( 10, {
+            particleGroup.addPool(10, {
                 type: 2,
                 position: {
                     spread: new THREE.Vector3(10),
-                    radius: 1,
+                    radius: 1
                 },
                 velocity: {
-                    value: new THREE.Vector3( 100 )
+                    value: new THREE.Vector3(100)
                 },
                 size: {
-                    value: [ 10, 0 ]
+                    value: [10, 0]
                 },
                 opacity: {
                     value: [1, 0]
@@ -79,7 +80,7 @@ module.exports = (rootOSCServer) => {
                 } else {
                     updateSettingsColor(particleGroup, data);
                 }
-                particleGroup.triggerPoolEmitter( 1, pos.setFromMatrixPosition(lhc.object3D.parent.matrixWorld) );
+                particleGroup.triggerPoolEmitter(1, pos.setFromMatrixPosition(lhc.object3D.parent.matrixWorld));
             });
         }
     });

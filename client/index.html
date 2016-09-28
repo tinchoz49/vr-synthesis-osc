@@ -2,44 +2,43 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <script type="text/javascript" src="vendor/aframe.min.js"></script>
-  <script type="text/javascript" src="vendor/aframe-particle-system-component.min.js"></script>
-  <script type="text/javascript" src="vendor/osc-browser.min.js"></script>
-  <script type="text/javascript" src="vendor/flocking-all.min.js"></script>
-  <script type="text/javascript" src="build/index.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="vendor/aframe.min.js"></script>
+    <script type="text/javascript" src="vendor/aframe-particle-system-component.min.js"></script>
+    <script type="text/javascript" src="vendor/osc-browser.min.js"></script>
+    <script type="text/javascript" src="vendor/flocking-all.min.js"></script>
+    <script type="text/javascript" src="build/index.js"></script>
+    <script type="text/javascript" src="//rawgit.com/aframevr/aframe/50a07cac9cd2f764b9ff4cd0a5bb20e408f8f4d6/examples/test-shaders/shaders/noise.js"></script>
+
 </head>
 
 <body>
-  <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
-    <a-assets>
-      <img id="sky" src="images/niHC9wI.jpg">
-    </a-assets>
+    <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+        <a-assets>
+            <img id="sky" src="images/niHC9wI.jpg">
+        </a-assets>
 
-    <a-entity>
-      <a-ring
-        radius-inner="2.5"
-        radius-outer="5"
-        color="#ffb6b6"
-        rotation="-90 0 0"
-        position="0 -2 0"
-        scale="4 4 4"
-        metalness="0.5"
-        opacity="0.8">
-      </a-ring>
+        <a-entity>
 
-      <a-entity id="channel_1">
-        <a-sphere radius="0.5" position="14 0 0" color="#bc2f2f" metalness="0.5">
-          <a-entity particle-system="texture: images/flare-2.png;" lhc></a-entity>
-        </a-sphere>
-        <a-animation attribute="rotation" to="0 360 0" dur="6000" easing="linear" repeat="indefinite">
-        </a-animation>
-      </a-entity>
-    </a-entity>
+            <a-entity id="channel_1">
+                <a-sphere radius="0.5" position="14 0 0" color="#bc2f2f" metalness="0.5">
+                    <a-entity particle-system="texture: images/flare-2.png;" lhc></a-entity>
+                </a-sphere>
+                <a-animation attribute="rotation" to="0 -360 0" dur="2000" easing="linear" repeat="indefinite">
+                </a-animation>
+            </a-entity>
+        </a-entity>
 
-    <a-sky src="#sky"></a-sky>
-  </a-scene>
+        <a-entity>
+            <a-torus material="shader: noise" color="#477bff" position="0 0 0" rotation="-90 0 0" segments-radial="50" segments-tubular="200" radius="18" radius-tubular="0.7"></a-torus>
+        </a-entity>
+
+        <a-entity position="1 2 8">
+            <a-camera></a-camera>
+        </a-entity>
+        <a-sky src="#sky"></a-sky>
+    </a-scene>
 </body>
 
 </html>

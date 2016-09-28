@@ -69,6 +69,7 @@
     "globals": {
       "document": true,
       "AFRAME": true,
+      "THREE": true,
       "window": true,
       "flock": true
     },
