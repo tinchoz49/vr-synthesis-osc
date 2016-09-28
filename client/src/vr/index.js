@@ -15,19 +15,22 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function updateColor(emitter, data) {
+function getColor(data) {
     const color = colors[getRandomInt(0, colors.length)];
+    return color;
+}
+
+function updateEmitterColor(emitter, data) {
+    const color = getColor(data);
     for (let i = 0; i < 4; i++) {
         emitter.color.value[i].setStyle(color);
     }
     emitter.color.value = emitter.color.value;
 }
 
-function updateVelocity(emitter, data) {
-    // inversamente proporcional al events_rate
-    let speed = 125 / clamp(data.events_rate, 0.01, 5);
-    emitter.velocity.spread.x = speed;
-    emitter.velocity.spread = emitter.velocity.spread;
+function updateSettingsColor(particleGroup, data) {
+    const color = getColor(data);
+    particleGroup._poolCreationSettings.color.value = [new THREE.Color(color)];
 }
 
 function updatePosition(emitter, matrixWorld) {
@@ -35,23 +38,49 @@ function updatePosition(emitter, matrixWorld) {
     emitter.position.value = emitter.position.value;
 }
 
+const pos = new THREE.Vector3();
+
 module.exports = (rootOSCServer) => {
     AFRAME.registerComponent('lhc', {
         init() {
             const lhc = this.el;
-            const emitter = lhc.components['particle-system'].particleGroup.emitters[0];
-            //emitter.disable();
+            const particleGroup = lhc.components['particle-system'].particleGroup;
+            particleGroup.removeEmitter(lhc.components['particle-system'].particleGroup.emitters[0]);
+
+            particleGroup.addPool( 10, {
+                type: 2,
+                position: {
+                    spread: new THREE.Vector3(10),
+                    radius: 1,
+                },
+                velocity: {
+                    value: new THREE.Vector3( 100 )
+                },
+                size: {
+                    value: [ 10, 0 ]
+                },
+                opacity: {
+                    value: [1, 0]
+                },
+                color: {
+                    value: [new THREE.Color('white')]
+                },
+                particleCount: 100,
+                alive: true,
+                duration: 0.05,
+                maxAge: {
+                    value: 0.5
+                }
+            }, false);
 
             rootOSCServer.on('raw-data', (data) => {
-                updateVelocity(emitter, data);
-                updateColor(emitter, data);
-                emitter.enable();
+                if (particleGroup._pool.length) {
+                    updateEmitterColor(particleGroup._pool[particleGroup._pool.length - 1], data);
+                } else {
+                    updateSettingsColor(particleGroup, data);
+                }
+                particleGroup.triggerPoolEmitter( 1, pos.setFromMatrixPosition(lhc.object3D.parent.matrixWorld) );
             });
-        },
-        tick() {
-            const lhc = this.el;
-            const emitter = lhc.components['particle-system'].particleGroup.emitters[0];
-            updatePosition(emitter, lhc.object3D.parent.matrixWorld);
         }
     });
 };
