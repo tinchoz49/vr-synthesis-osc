@@ -43,18 +43,28 @@ function updateVelocity(emitter, data) {
     emitter.velocity.spread = emitter.velocity.spread;
 }
 
+function updatePosition(emitter, matrixWorld) {
+    emitter.position.value.setFromMatrixPosition(matrixWorld);
+    emitter.position.value = emitter.position.value;
+}
+
 module.exports = (rootOSCServer) => {
     AFRAME.registerComponent('lhc', {
         init() {
             const lhc = this.el;
             const emitter = lhc.components['particle-system'].particleGroup.emitters[0];
-            emitter.disable();
+            //emitter.disable();
 
             rootOSCServer.on('raw-data', (data) => {
-                emitter.enable();
                 updateVelocity(emitter, data);
                 updateColor(emitter, data);
+                emitter.enable();
             });
+        },
+        tick() {
+            const lhc = this.el;
+            const emitter = lhc.components['particle-system'].particleGroup.emitters[0];
+            updatePosition(emitter, lhc.object3D.parent.matrixWorld);
         }
     });
 };

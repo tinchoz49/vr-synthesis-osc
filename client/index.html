@@ -15,17 +15,27 @@
   <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
     <a-assets>
       <img id="sky" src="images/niHC9wI.jpg">
+      <a-asset-item id="model" src="models/test.dae">
     </a-assets>
-    <a-entity position="0 2.25 -5" particle-system="
-      preset: dust;
-      particleCount: 8000;
-      maxAge: 4;
-      size: 2;
-      texture: images/flare-2.png;
-      velocitySpread: 150 7.5 10" lhc></a-entity>
 
-    <!-- Textured plane parallel to ground. -->
-    <a-plane id="scene" height="20" color="#3B3F47" width="20" rotation="-90 0 0"></a-plane>
+    <a-entity>
+      <!-- <a-torus segments-radial="10" color="#a3a3a3" rotation="90 0 0" arc="270 270" radius="8" radius-tubular="0.8" side="double" scale="4 4 4" metalness="0.5" opacity="0.5"></a-torus> -->
+      <!-- <a-collada-model rotation="0 0 0" position="0 0 0" src="#model" scale="1 1 1"></a-collada-model> -->
+
+      <a-entity>
+        <a-sphere id="channel_1" radius="1" position="14 0 0" color="#FFFFFF">
+          <a-entity particle-system="
+            particleCount: 400;
+            maxAge: 1;
+            positionSpread: 3 3 3;
+            velocityValue: 3 3 3;
+            size: 1;
+            texture: images/smokeparticle.png;" lhc></a-entity>
+        </a-sphere>
+        <a-animation attribute="rotation" to="0 360 0" dur="6000" easing="linear" repeat="indefinite">
+        </a-animation>
+      </a-entity>
+    </a-entity>
 
     <a-sky src="#sky"></a-sky>
   </a-scene>
