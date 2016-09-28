@@ -7,6 +7,10 @@ const colors = [
     '#fff951'
 ];
 
+function clamp(val, min, max) {
+    return Math.max(Math.min(val, max), min);
+}
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -20,25 +24,8 @@ function updateColor(emitter, data) {
 }
 
 function updateVelocity(emitter, data) {
-    let speed = 150;
-    // todavia no se como armar una ecuacion inversamente proporcional al events_rate
-    if (data.events_rate <= 0.2) {
-        speed = 400;
-    } else if (data.events_rate <= 0.5) {
-        speed = 350;
-    } else if (data.events_rate <= 0.8) {
-        speed = 300;
-    } else if (data.events_rate <= 1) {
-        speed = 150;
-    } else if (data.events_rate <= 2) {
-        speed = 100;
-    } else if (data.events_rate <= 3) {
-        speed = 50;
-    } else if (data.events_rate <= 4) {
-        speed = 25;
-    } else {
-        speed = 10;
-    }
+    // inversamente proporcional al events_rate
+    let speed = 125 / clamp(data.events_rate, 0.01, 5);
     emitter.velocity.spread.x = speed;
     emitter.velocity.spread = emitter.velocity.spread;
 }

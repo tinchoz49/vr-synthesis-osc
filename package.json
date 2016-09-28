@@ -69,7 +69,8 @@
     "globals": {
       "document": true,
       "AFRAME": true,
-      "window": true
+      "window": true,
+      "flock": true
     },
     "rules": {
       "max-len": 0,
