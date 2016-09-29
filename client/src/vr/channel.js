@@ -47,7 +47,7 @@ module.exports = function (rootOSCServer) {
             const particleGroup = el.components['particle-system'].particleGroup;
             particleGroup.removeEmitter(particleGroup.emitters[0]);
 
-            particleGroup.addPool(100, {
+            particleGroup.addPool(10, {
                 type: 2,
                 position: {
                     spread: new THREE.Vector3(3),
@@ -65,11 +65,10 @@ module.exports = function (rootOSCServer) {
                 color: {
                     value: [new THREE.Color('white')]
                 },
-                particleCount: 200,
-                alive: true,
-                duration: 0.05,
+                particleCount: 100,
+                duration: 0.10,
                 maxAge: {
-                    value: 0.5
+                    value: 1
                 }
             }, false);
 
