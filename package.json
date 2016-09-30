@@ -23,6 +23,8 @@
     "flyd": "^0.2.2",
     "osc": "^2.1.0",
     "pify": "^2.3.0",
+    "raf": "^3.3.0",
+    "shader-particle-engine": "^1.0.5",
     "uws": "^0.9.0"
   },
   "browserify-shim": {

@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title></title>
     <script type="text/javascript" src="vendor/aframe.min.js"></script>
-    <script type="text/javascript" src="vendor/aframe-particle-system-component.min.js"></script>
     <script type="text/javascript" src="vendor/osc-browser.min.js"></script>
     <script type="text/javascript" src="vendor/flocking-all.min.js"></script>
     <script type="text/javascript" src="build/index.js"></script>
@@ -21,15 +20,12 @@
         </a-entity>
 
         <a-entity>
-            <a-torus wireframe color="#477bff" position="0 0 0" rotation="-90 0 0" segments-radial="50" segments-tubular="200" radius="18" radius-tubular="0.7">
+            <a-torus wireframe color="#477bff" scale="2 2 2" position="0 0 0" rotation="-90 0 0" segments-radial="50" segments-tubular="200" radius="10" radius-tubular="0.7">
             </a-torus>
             <a-animation attribute="rotation" to="0 360 0" dur="60000" easing="linear" repeat="indefinite">
             </a-animation>
         </a-entity>
 
-        <a-entity position="1 2 8">
-            <a-camera></a-camera>
-        </a-entity>
         <a-sky color="black"></a-sky>
     </a-scene>
 </body>
