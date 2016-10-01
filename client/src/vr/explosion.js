@@ -44,9 +44,9 @@ AFRAME.registerComponent('explosion', {
             },
             particleCount: 100,
             alive: true,
-            duration: 0.05,
+            duration: 0.10,
             maxAge: {
-                value: 0.5
+                value: 1
             }
         };
     },

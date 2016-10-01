@@ -25,6 +25,7 @@
     "pify": "^2.3.0",
     "raf": "^3.3.0",
     "shader-particle-engine": "^1.0.5",
+    "tone": "^0.7.1",
     "uws": "^0.9.0"
   },
   "browserify-shim": {
